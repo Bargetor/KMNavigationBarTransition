@@ -10,14 +10,14 @@ import UIKit
 
 struct NavigationBarData {
     
-    static let BarTintColorArray: [NavigationBarBackgroundViewColor] = [.Cyan, .Yellow, .Green, .Orange, .lightGray, .NoValue]
-    static let BackgroundImageColorArray: [NavigationBarBackgroundViewColor] = [.NoValue, .Transparent, .Cyan, .Yellow, .Green, .Orange, .lightGray]
+    static let BarTintColorArray: [NavigationBarBackgroundViewColor] = [.Cyan, .Yellow, .Green, .Orange, .lightGray, .Migrant, .NoValue]
+    static let BackgroundImageColorArray: [NavigationBarBackgroundViewColor] = [.NoValue, .Migrant, .Transparent, .Cyan, .Yellow, .Green, .Orange, .lightGray]
     
     var barTintColor = NavigationBarData.BarTintColorArray.first!
     var backgroundImageColor = NavigationBarData.BackgroundImageColorArray.first!
     var prefersHidden = false
     var prefersShadowImageHidden = false
-
+    
 }
 
 enum NavigationBarBackgroundViewColor: String {
@@ -27,6 +27,7 @@ enum NavigationBarBackgroundViewColor: String {
     case Orange
     case lightGray
     case Transparent
+    case Migrant
     case NoValue = "No Value"
     
     var toUIColor: UIColor? {
@@ -41,6 +42,8 @@ enum NavigationBarBackgroundViewColor: String {
             return UIColor.orange
         case .lightGray:
             return UIColor.lightGray
+        case .Migrant:
+            return UIColor(red: 1.0/255.0, green: 25.0/255.0, blue: 33.0/255.0, alpha: 1)
         default:
             return nil
         }
@@ -59,4 +62,5 @@ enum NavigationBarBackgroundViewColor: String {
         }
     }
 }
+
 

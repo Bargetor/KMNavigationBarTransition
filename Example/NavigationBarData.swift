@@ -43,7 +43,7 @@ enum NavigationBarBackgroundViewColor: String {
         case .lightGray:
             return UIColor.lightGray
         case .Migrant:
-            return UIColor(red: 1.0/255.0, green: 25.0/255.0, blue: 33.0/255.0, alpha: 1)
+            return UIColor(red: 1.0/255.0, green: 25.0/255.0, blue: 33.0/255.0, alpha: 0.2)
         default:
             return nil
         }

@@ -76,6 +76,10 @@
                         @selector(setBackgroundImage:forBarMetrics:),
                         [self class],
                         @selector(km_setBackgroundImage:forBarMetrics:));
+        KMSwizzleMethod([self class],
+                        @selector(backgroundImageForBarMetrics:),
+                        [self class],
+                        @selector(km_backgroundImageForBarMetrics:));
     });
 }
     
@@ -86,8 +90,26 @@
 }
     
 -(void)km_setBackgroundImage:(UIImage *)backgroundImage forBarMetrics:(UIBarMetrics)barMetrics{
-    [[self kmNav] setBackgroundColor: [UIColor colorWithPatternImage:backgroundImage]];
     [self km_setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
+    [[self kmNav] setBackgroundColor: [UIColor colorWithPatternImage:backgroundImage]];
+//    const CGFloat *colors = CGColorGetComponents([UIColor colorWithPatternImage:backgroundImage].CGColor);
+//    printf("%f", colors);
+//    [[self kmNav] setBackgroundColor: [UIColor colorWithRed: 1.0/255.0  green: 25.0/255.0  blue: 33.0/255.0  alpha: 0.2]];
+}
+    
+- (UIImage *)km_backgroundImageForBarMetrics:(UIBarMetrics)barMetrics{
+    return [self createImageWithColor:[[self kmNav] backgroundColor]];
+}
+    
+- (UIImage*) createImageWithColor: (UIColor*) color{
+    CGRect rect=CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return theImage;
 }
 
 -(KMUINavigationBarDSL*)kmNav{
